@@ -1,0 +1,40 @@
+Package: PhenoSync
+Title: Phenological Synchrony Indices for Plant Phenology
+Version: 0.0.0.9010
+Authors@R: c(
+    person(
+      given = "Saket S.",
+      family = "Shrotri",
+      email = "shrotri@biology.sdu.dk",
+      role = c("aut", "cre"),
+      comment = c(Affiliation = "Faculty of Science, Department of Biology, PopBio, University of Southern Denmark, Campusvej 55, DK-5230, Odense M.")
+    ),
+    person(
+      given = "Owen R.",
+      family = "Jones",
+      email = "jones@biology.sdu.dk",
+      role = "aut",
+      comment = c(Affiliation = "Faculty of Science, Department of Biology, PopBio, University of Southern Denmark, Campusvej 55, DK-5230, Odense M.")
+    )
+  )
+Description: Provides functions for calculating plant phenological synchrony
+    indices from phenology matrices and selected index-specific data structures,
+    with helpers for automatic index selection, index definitions, and generation
+    of daily flowering curves of true phenological communities with seven plant
+    community archetypes.
+License: MIT + file LICENSE
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+Imports:
+    graphics,
+    stats,
+    utils
+Suggests:
+    testthat (>= 3.0.0),
+    usethis,
+    sf
+Config/testthat/edition: 3
+Depends: 
+    R (>= 3.5)
+LazyData: true
+Config/roxygen2/version: 8.0.0
