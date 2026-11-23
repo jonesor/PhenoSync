@@ -32,6 +32,9 @@
 #'   example, `list(primack_Z = list(strong_threshold = 0.75))`.
 #' @param make_plot Logical. If `TRUE`, draws a base R two-panel summary plot
 #'   and stores a recorded base plot in the returned `plot` component when possible.
+#'   When R is run from a script with no graphics device open, the plot is not
+#'   drawn to a file (so no `Rplots.pdf` is created); it is only recorded, and
+#'   can be shown later with `print(res$plot)` or `grDevices::replayPlot(res$plot)`.
 #' @param verbose Logical. If `TRUE`, prints progress messages.
 #' @param ... Additional arguments passed to individual index functions when the
 #'   argument names match their formal arguments.
@@ -201,6 +204,17 @@ calculate_indices <- function(data,
 
   index_plot <- NULL
   if (isTRUE(make_plot) && nrow(summary) > 0) {
+    # When R is run from a script and no graphics device is open, drawing the
+    # plot would make R open its default file device and write Rplots.pdf to
+    # the working directory. Draw on a temporary device that writes no file
+    # instead, so the recorded plot is still returned in `plot`.
+    use_null_device <- !interactive() && grDevices::dev.cur() == 1
+    if (use_null_device) {
+      grDevices::pdf(file = NULL)
+      null_dev <- grDevices::dev.cur()
+      grDevices::dev.control("enable")
+      on.exit(grDevices::dev.off(null_dev), add = TRUE)
+    }
     plot_index_summary(summary)
     index_plot <- tryCatch(
       grDevices::recordPlot(),

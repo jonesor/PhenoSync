@@ -54,7 +54,10 @@ treated as census labels without naming it explicitly.}
 example, \code{list(primack_Z = list(strong_threshold = 0.75))}.}
 
 \item{make_plot}{Logical. If \code{TRUE}, draws a base R two-panel summary plot
-and stores a recorded base plot in the returned \code{plot} component when possible.}
+and stores a recorded base plot in the returned \code{plot} component when possible.
+When R is run from a script with no graphics device open, the plot is not
+drawn to a file (so no \code{Rplots.pdf} is created); it is only recorded, and
+can be shown later with \code{print(res$plot)} or \code{grDevices::replayPlot(res$plot)}.}
 
 \item{verbose}{Logical. If \code{TRUE}, prints progress messages.}
 
