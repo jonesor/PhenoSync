@@ -80,30 +80,22 @@ primack_Z <- function(data,
   strong_days <- colSums(strong_mat)
   
   # STEP 2: Pairwise overlap calculation
-  pair_results <- data.frame()
-  c_values <- c()
+  pairs <- utils::combn(n, 2)
+  i <- pairs[1, ]
+  j <- pairs[2, ]
   
-  for (i in 1:(n - 1)) {
-    for (j in (i + 1):n) {
-      
-      a <- sum(strong_mat[, i] == 1 & strong_mat[, j] == 1)
-      b <- min(strong_days[i], strong_days[j])
-      
-      c_ij <- if (b == 0) NA_real_ else a / b
-      c_values <- c(c_values, c_ij)
-      
-      pair_results <- rbind(
-        pair_results,
-        data.frame(
-          id_i = ids[i],
-          id_j = ids[j],
-          a_overlap = a,
-          b_shortest = b,
-          c_ij = c_ij
-        )
-      )
-    }
-  }
+  a <- as.integer(colSums(strong_mat[, i, drop = FALSE] == 1 & strong_mat[, j, drop = FALSE] == 1))
+  b <- unname(pmin(strong_days[i], strong_days[j]))
+  
+  c_values <- ifelse(b == 0, NA_real_, a / b)
+  
+  pair_results <- data.frame(
+    id_i = ids[i],
+    id_j = ids[j],
+    a_overlap = a,
+    b_shortest = b,
+    c_ij = c_values
+  )
   
   # STEP 3: Population mean
   Z <- mean(c_values, na.rm = TRUE)
