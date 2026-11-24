@@ -35,7 +35,7 @@ pheno_index_database <- function() {
     dainou_SI = list(
       name = "Dainou et al. (2012) specifically designed to measure synchrony between males and females in sexually dimorphic species",
       function_name = "dainou_SI",
-      citation = "Daïnou, K., Laurenty, E., Mahy, G., Hardy, O. J., Brostaux, Y., Tagg, N., & Doucet, J. L. (2012). Phenological patterns in a natural population of a tropical timber tree species, Milicia excelsa (Moraceae): Evidence of isolation by time and its interaction with feeding strategies of dispersers. American Journal of Botany, 99(9), 1453-1463. https://doi.org/10.3732/ajb.1200147",
+      citation = "Da\u00efnou, K., Laurenty, E., Mahy, G., Hardy, O. J., Brostaux, Y., Tagg, N., & Doucet, J. L. (2012). Phenological patterns in a natural population of a tropical timber tree species, Milicia excelsa (Moraceae): Evidence of isolation by time and its interaction with feeding strategies of dispersers. American Journal of Botany, 99(9), 1453-1463. https://doi.org/10.3732/ajb.1200147",
       aspect = "Synchrony of male flowering with availability of female flowering.",
       formula = "d_j = mean_t(p_F,t) over days when male j flowers; S = mean_j(d_j).",
       input = "Data frame with id column, sex column, and numeric census-day columns. Values > 0 are treated as flowering presence.",
@@ -55,7 +55,7 @@ pheno_index_database <- function() {
     koenig_rp = list(
       name = "Koenig et al. (2003) mean pairwise correlation synchrony",
       function_name = "koenig_rp",
-      citation = "Koenig, W. D., Kelly, D., Sork, V. L., Duncan, R. P., Elkinton, J. S., Peltonen, M. S., & Westfall, R. D. (2003). Dissecting components of population‐level variation in seed production and the evolution of masting behavior. Oikos, 102(3), 581–591. https://doi.org/10.1034/j.1600-0706.2003.12272.x",
+      citation = "Koenig, W. D., Kelly, D., Sork, V. L., Duncan, R. P., Elkinton, J. S., Peltonen, M. S., & Westfall, R. D. (2003). Dissecting components of population\u2010level variation in seed production and the evolution of masting behavior. Oikos, 102(3), 581\u2013591. https://doi.org/10.1034/j.1600-0706.2003.12272.x",
       aspect = "Correlation in temporal abundance/intensity fluctuations.",
       formula = "r_p = mean of all pairwise Pearson correlations among flowering schedules.",
       input = "Wide numeric matrix/data frame; rows = census days; columns = individuals/species.",
@@ -65,7 +65,7 @@ pheno_index_database <- function() {
     mahoro_Si = list(
       name = "Mahoro (2002) proportional-schedule synchrony",
       function_name = "mahoro_Si",
-      citation = "Mahoro, S. (2002). Individual flowering schedule, fruit set, and flower and seed predation in Vaccinium hirtum Thunb. (Ericaceae). Canadian Journal of Botany, 80(1), 82–92. https://doi.org/10.1139/b01-136",
+      citation = "Mahoro, S. (2002). Individual flowering schedule, fruit set, and flower and seed predation in Vaccinium hirtum Thunb. (Ericaceae). Canadian Journal of Botany, 80(1), 82\u201392. https://doi.org/10.1139/b01-136",
       aspect = "Similarity between each individual's proportional flowering schedule and the rest of the population.",
       formula = "S_i = (1/2) * (2 - sum_t |y_i,t - y_bar_-i,t|), where y_i,t is proportional seasonal flowering (Mahoro 2002, eqn 2).",
       input = "Wide numeric matrix/data frame; rows = census days; columns = individuals.",
@@ -75,7 +75,7 @@ pheno_index_database <- function() {
     mahoro_Ri = list(
       name = "Mahoro (2002) rank-order index",
       function_name = "mahoro_Ri",
-      citation = "Mahoro, S. (2002). Individual flowering schedule, fruit set, and flower and seed predation in Vaccinium hirtum Thunb. (Ericaceae). Canadian Journal of Botany, 80(1), 82–92. https://doi.org/10.1139/b01-136",
+      citation = "Mahoro, S. (2002). Individual flowering schedule, fruit set, and flower and seed predation in Vaccinium hirtum Thunb. (Ericaceae). Canadian Journal of Botany, 80(1), 82\u201392. https://doi.org/10.1139/b01-136",
       aspect = "Rank order of cumulative flowering up to the population peak day.",
       formula = "R_i is derived from daily ranks of cumulative proportional flowering up to the population peak day.",
       input = "Wide numeric matrix/data frame; rows = census days; columns = individuals.",
@@ -85,7 +85,7 @@ pheno_index_database <- function() {
     marquis_SM = list(
       name = "Marquis (1988) synchrony measure",
       function_name = "marquis_SM",
-      citation = "Marquis, R. J. (1988). Phenological Variation in the Neotropical Understory Shrub Piper Arielanum: Causes and Consequences. Ecology, 69(5), 1552–1565. https://doi.org/10.2307/1941653",
+      citation = "Marquis, R. J. (1988). Phenological Variation in the Neotropical Understory Shrub Piper Arielanum: Causes and Consequences. Ecology, 69(5), 1552\u20131565. https://doi.org/10.2307/1941653",
       aspect = "Individual synchrony weighted by the number/proportion of other individuals flowering each day.",
       formula = "SM_i is calculated over days when individual i flowers using the population flowering proportion p_t.",
       input = "Wide numeric matrix/data frame; rows = census days; columns = individuals. Values > 0 are treated as presence.",
@@ -95,7 +95,7 @@ pheno_index_database <- function() {
     michalski_durka_CV = list(
       name = "Michalski & Durka (2007) coefficient-of-variation index",
       function_name = "michalski_durka_CV",
-      citation = "Michalski, S. G., & Durka, W. (2007). Synchronous Pulsed Flowering: Analysis of the Flowering Phenology in Juncus (Juncaceae). Annals of Botany, 100(6), 1271–1285. https://doi.org/10.1093/aob/mcm206",
+      citation = "Michalski, S. G., & Durka, W. (2007). Synchronous Pulsed Flowering: Analysis of the Flowering Phenology in Juncus (Juncaceae). Annals of Botany, 100(6), 1271\u20131285. https://doi.org/10.1093/aob/mcm206",
       aspect = "Temporal spread/dispersion of flowering intensity.",
       formula = "CV = SD(x_t) / mean(x_t), calculated for population and individual flowering profiles.",
       input = "Wide numeric matrix/data frame; rows = census days; columns = individuals/species.",
@@ -105,7 +105,7 @@ pheno_index_database <- function() {
     pianka_overlap = list(
       name = "Pianka (1974) niche-overlap index applied to phenology by Fleming & Partridge, 1984 (https://doi.org/10.1007/BF00384266)",
       function_name = "pianka_overlap",
-      citation = "Pianka, E. R. (1974). Niche Overlap and Diffuse Competition. Proceedings of the National Academy of Sciences, 71(5), 2141–2145. https://doi.org/10.1073/pnas.71.5.2141",
+      citation = "Pianka, E. R. (1974). Niche Overlap and Diffuse Competition. Proceedings of the National Academy of Sciences, 71(5), 2141\u20132145. https://doi.org/10.1073/pnas.71.5.2141",
       aspect = "Distributional overlap of proportional flowering schedules.",
       formula = "O_jk = sum_t p_j,t p_k,t / sqrt(sum_t p_j,t^2 * sum_t p_k,t^2).",
       input = "Wide numeric matrix/data frame; rows = census days; columns = individuals/species.",
@@ -115,7 +115,7 @@ pheno_index_database <- function() {
     poole_rathcke = list(
       name = "Poole & Rathcke (1979) peak-spacing index",
       function_name = "poole_rathcke",
-      citation = "Poole, R. W., & Rathcke, B. J. (1979). Regularity, Randomness, and Aggregation in Flowering Phenologies. Science, 203(4379), 470–471. https://doi.org/10.1126/science.203.4379.470",
+      citation = "Poole, R. W., & Rathcke, B. J. (1979). Regularity, Randomness, and Aggregation in Flowering Phenologies. Science, 203(4379), 470\u2013471. https://doi.org/10.1126/science.203.4379.470",
       aspect = "Spacing, aggregation, or regularity of peak flowering dates.",
       formula = "P = variance of normalized distances among ordered peak dates and season boundaries; ratio = P / E(P).",
       input = "Wide numeric matrix/data frame; rows = census days; columns = species. Peak date is extracted as the first maximum day.",
@@ -125,7 +125,7 @@ pheno_index_database <- function() {
     primack_Z = list(
       name = "Primack (1980) strong-flowering overlap index",
       function_name = "primack_Z",
-      citation = "Primack, R. B. (1980). Variation in the Phenology of Natural Populations of Montane Shrubs in New Zealand. The Journal of Ecology, 68(3), 849–862. https://doi.org/10.2307/2259460",
+      citation = "Primack, R. B. (1980). Variation in the Phenology of Natural Populations of Montane Shrubs in New Zealand. The Journal of Ecology, 68(3), 849\u2013862. https://doi.org/10.2307/2259460",
       aspect = "Overlap among strong flowering periods.",
       formula = "c_ij = shared strong-flowering days / shorter strong-flowering duration; Z = mean pairwise c_ij.",
       input = "Wide numeric matrix/data frame. Strong flowering is defined relative to each individual's maximum flowering intensity.",
@@ -135,7 +135,7 @@ pheno_index_database <- function() {
     schoener_SI = list(
       name = "Schoener-style neighbourhood index applied to plant phenology by Hall et al., 2018 (https://doi.org/10.1080/15230430.2018.1548866)",
       function_name = "schoener_SI",
-      citation = "Schoener, T. W. (1970). Nonsynchronous Spatial Overlap of Lizards in Patchy Habitats. Ecology, 51(3), 408–418. https://doi.org/10.2307/1935376",
+      citation = "Schoener, T. W. (1970). Nonsynchronous Spatial Overlap of Lizards in Patchy Habitats. Ecology, 51(3), 408\u2013418. https://doi.org/10.2307/1935376",
       aspect = "Spatial neighbourhood synchrony; compares focal individuals with neighbours within a distance threshold.",
       formula = "Neighbourhood SI is calculated from temporal overlap/similarity among individuals within the specified spatial neighbourhood.",
       input = "Metadata with IDs and coordinates plus matching wide flowering matrix. Can use x/y or lon/lat.",
@@ -165,7 +165,7 @@ pheno_index_database <- function() {
     wadgymar_Si = list(
       name = "Wadgymar et al. (2015) individual flowering-schedule synchrony",
       function_name = "wadgymar_Si",
-      citation = "Wadgymar, S. M., Austen, E. J., Cumming, M. N., & Weis, A. E. (2015). Simultaneous pulsed flowering in a temperate legume: Causes and consequences of multimodality in the shape of floral display schedules. Journal of Ecology, 103(2), 316–327. https://doi.org/10.1111/1365-2745.12362",
+      citation = "Wadgymar, S. M., Austen, E. J., Cumming, M. N., & Weis, A. E. (2015). Simultaneous pulsed flowering in a temperate legume: Causes and consequences of multimodality in the shape of floral display schedules. Journal of Ecology, 103(2), 316\u2013327. https://doi.org/10.1111/1365-2745.12362",
       aspect = "Within-individual daily display unevenness/spread across flowering days.",
       formula = "S_i = sqrt(SS_i / T_i) * sqrt(D_i / (D_i - 1)), where SS_i is squared deviation from even daily flowering.",
       input = "Wide numeric matrix/data frame; rows = census days; columns = individuals.",
@@ -175,7 +175,7 @@ pheno_index_database <- function() {
     weis_sync = list(
       name = "Weis et al. (2014) phenotypic assortment and synchrony",
       function_name = "weis_sync",
-      citation = "Weis, A. E., Nardone, E., & Fox, G. A. (2014). The strength of assortative mating for flowering date and its basis in individual variation in flowering schedule. Journal of Evolutionary Biology, 27(10), 2138–2151. https://doi.org/10.1111/jeb.12465",
+      citation = "Weis, A. E., Nardone, E., & Fox, G. A. (2014). The strength of assortative mating for flowering date and its basis in individual variation in flowering schedule. Journal of Evolutionary Biology, 27(10), 2138\u20132151. https://doi.org/10.1111/jeb.12465",
       aspect = "Flowering synchrony and trait-based assortative mating from mating matrix structure.",
       formula = "PHI = M %*% P; S = lambda_1 / sum(lambda); rho = z_trait' PHI z_trait.",
       input = "Data frame/matrix with individuals in rows, one numeric trait column, and flowering-schedule columns.",

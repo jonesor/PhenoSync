@@ -156,7 +156,7 @@ weis_sync <- function(data,
     PHI <- M %*% P
     
     # Eigenvalues
-    EV <- eigen(PHI, sym = FALSE)
+    EV <- eigen(PHI, symmetric = FALSE)
     ev.vector <- EV$values
     ev.1 <- ev.vector[1]
     ev.sum <- sum(ev.vector)
@@ -199,8 +199,8 @@ weis_sync <- function(data,
       RHO[i] <- tmp$rho
     }
     
-    S.CL <- quantile(SYNC, probs = ci_probs, na.rm = TRUE, type = 7)
-    rho.CL <- quantile(RHO, probs = ci_probs, na.rm = TRUE, type = 7)
+    S.CL <- stats::quantile(SYNC, probs = ci_probs, na.rm = TRUE, type = 7)
+    rho.CL <- stats::quantile(RHO, probs = ci_probs, na.rm = TRUE, type = 7)
     
     boot_results <- list(
       n_boot = n_boot,

@@ -44,7 +44,7 @@ koenig_rp <- function(data, census_col = NULL, use = "pairwise.complete.obs", ve
   }
   
   # warn for zero-variance series, because Pearson r is undefined
-  sd_vec <- apply(flower_mat, 2, sd, na.rm = TRUE)
+  sd_vec <- apply(flower_mat, 2, stats::sd, na.rm = TRUE)
   if (any(sd_vec == 0 | is.na(sd_vec))) {
     warning(
       "Some columns have zero variance; pairwise correlations involving them will be NA: ",
