@@ -49,6 +49,10 @@ bolmgren_S <- function(data,
   if (nrow(df) == 0) {
     stop("No complete flower records found after removing missing values.")
   }
+
+  if (any(is.infinite(df[[onset_col]]) | is.infinite(df[[end_col]]))) {
+    stop("Onset or end days contain infinite values (Inf or -Inf). Days must be finite.")
+  }
   
   # invalid records
   bad_rows <- which(df[[end_col]] < df[[onset_col]])

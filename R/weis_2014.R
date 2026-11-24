@@ -76,6 +76,10 @@ weis_sync <- function(data,
   if (any(is.na(df[[1]]))) {
     stop("Trait column contains NA or non-numeric values after coercion.")
   }
+
+  if (any(is.infinite(df[[1]]))) {
+    stop("Trait column contains infinite values (Inf or -Inf). Trait values must be finite.")
+  }
   
   if (any(is.na(as.matrix(df[, -1, drop = FALSE])))) {
     stop("Flowering-schedule columns contain NA or non-numeric values after coercion.")
@@ -83,6 +87,8 @@ weis_sync <- function(data,
   
   flr.matrix <- as.matrix(df[, -1, drop = FALSE])
   mode(flr.matrix) <- "numeric"
+
+  check_flowering_values(flr.matrix, "data")
   
   if (any(flr.matrix < 0)) {
     stop("Flowering-schedule values cannot be negative.")

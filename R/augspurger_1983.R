@@ -38,6 +38,10 @@ augspurger_Xi <- function(flower_mat,
   
   ids <- colnames(flower_mat)
   n <- ncol(flower_mat)
+
+  if (n < 2) {
+    stop("At least two individuals are required.")
+  }
   
   # STEP 1: Convert flower counts to presence/absence
   

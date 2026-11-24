@@ -69,6 +69,14 @@ dainou_SI <- function(data,
   if (!is.numeric(flower_mat)) {
     stop("Census-day columns must be numeric.")
   }
+
+  check_flowering_values(flower_mat, "data")
+
+  if (anyDuplicated(ids) > 0) {
+    stop("The ID column has repeated IDs: ",
+         paste(unique(ids[duplicated(ids)]), collapse = ", "),
+         ". Each individual needs its own row.")
+  }
   
   # Presence / absence
   presence_mat <- (flower_mat > 0) * 1

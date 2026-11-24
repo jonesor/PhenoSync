@@ -1,5 +1,40 @@
 # Internal helpers for preserving census identifiers in wide phenology matrices.
 
+# Stops with a clear message if flowering values cannot be right: values
+# that are negative or infinite, or two columns with the same name. Missing
+# values are left for each index to handle.
+check_flowering_values <- function(m, data_arg = "data") {
+  bad <- is.infinite(m) | (!is.na(m) & m < 0)
+  if (any(bad)) {
+    cols <- colnames(m)
+    if (is.null(cols)) cols <- paste0("column ", seq_len(ncol(m)))
+    stop(data_arg, " contains negative or infinite values in: ",
+         paste(unique(cols[col(m)[bad]]), collapse = ", "),
+         ". Flowering values must be finite and zero or above.", call. = FALSE)
+  }
+
+  cols <- colnames(m)
+  if (!is.null(cols) && anyDuplicated(cols) > 0) {
+    stop(data_arg, " has more than one column with the same name: ",
+         paste(unique(cols[duplicated(cols)]), collapse = ", "),
+         ". Each individual or species needs its own column name.", call. = FALSE)
+  }
+
+  invisible(m)
+}
+
+# Stops if a wide matrix (censuses in rows) has too little data for any index.
+check_census_dimensions <- function(m, data_arg = "data") {
+  if (ncol(m) < 1) {
+    stop(data_arg, " has no individual or species columns.", call. = FALSE)
+  }
+  if (nrow(m) < 2) {
+    stop(data_arg, " has ", nrow(m), " census row(s). At least two censuses ",
+         "are needed to measure flowering synchrony.", call. = FALSE)
+  }
+  invisible(m)
+}
+
 resolve_column_position <- function(data, col, arg_name = "census_col") {
   if (is.null(col)) return(NULL)
 
@@ -66,7 +101,14 @@ prepare_census_matrix <- function(data,
     }
     attr(m, "census_col") <- names(as.data.frame(data, check.names = FALSE))[census_pos]
     attr(m, "census") <- rownames(m)
+    check_census_dimensions(m, data_arg)
+    check_flowering_values(m, data_arg)
     return(m)
+  }
+
+  if (nrow(data) < 1 || ncol(data) < 1) {
+    stop(data_arg, " is empty: it needs at least two census rows and one ",
+         "individual or species column.", call. = FALSE)
   }
 
   m <- suppressWarnings(as.matrix(data))
@@ -90,6 +132,8 @@ prepare_census_matrix <- function(data,
   }
 
   attr(m, "census") <- rownames(m)
+  check_census_dimensions(m, data_arg)
+  check_flowering_values(m, data_arg)
   m
 }
 
