@@ -32,12 +32,39 @@ dainou_SI <- function(data,
   
   df <- as.data.frame(data)
   
+  # Work out which columns hold the IDs and sexes. id_col and sex_col can be
+  # given as column numbers or column names.
+  find_col <- function(col, arg_name) {
+    if (length(col) != 1 || is.na(col)) {
+      stop(arg_name, " must be a single column number or column name.")
+    }
+    if (is.character(col)) {
+      pos <- match(col, names(df))
+      if (is.na(pos)) {
+        stop(arg_name, " '", col, "' is not a column in data.")
+      }
+    } else if (is.numeric(col) && col == round(col) && col >= 1 && col <= ncol(df)) {
+      pos <- as.integer(col)
+    } else {
+      stop(arg_name, " must be a column number between 1 and ", ncol(df),
+           ", or a column name.")
+    }
+    pos
+  }
+  
+  id_pos  <- find_col(id_col, "id_col")
+  sex_pos <- find_col(sex_col, "sex_col")
+  
+  if (id_pos == sex_pos) {
+    stop("id_col and sex_col must be different columns.")
+  }
+  
   # Extract metadata
-  ids  <- df[[id_col]]
-  sex  <- df[[sex_col]]
+  ids  <- df[[id_pos]]
+  sex  <- df[[sex_pos]]
   
   # Extract census matrix
-  flower_mat <- as.matrix(df[, -(c(id_col, sex_col))])
+  flower_mat <- as.matrix(df[, -c(id_pos, sex_pos), drop = FALSE])
   
   if (!is.numeric(flower_mat)) {
     stop("Census-day columns must be numeric.")
